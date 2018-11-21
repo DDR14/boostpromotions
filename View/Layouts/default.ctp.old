@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=yes, maximum-scale=1.0, minimal-ui" name="viewport">
+        <?= $this->Html->meta("description", $this->fetch("description")); ?>
+        <?= $this->Html->meta("keywords", $this->fetch("keywords")); ?>
+
+        <title>
+            <?= $this->fetch("title") ?> : Boost Promotions
+        </title>
+
+        <?= $this->Html->css('bootstrap.css'); ?>
+        <?= $this->Html->css("owl.theme.css"); ?>
+        <?= $this->Html->css("site.css"); ?>
+        <?= $this->fetch('css'); ?>
+    </head>
+    <body>        
+        <div id="page">
+            <div class="el-PageToolbar">
+                <div class="el-Wrapper">
+                    <span class="el-PageToolbar-message">
+                        Insert any awesome text here
+                    </span>
+                    <ul class="el-PageToolbar-list el-PageToolbar-list--userLinks">
+                        <li class="el-PageToolbar-helpLink"><a href="/help_center">Help Center</a></li>
+                        <li class="el-PageToolbar-accountLink">
+                            <?php 
+                                if(AuthComponent::user("customers_id"))
+                                    echo $this->Html->link("Your Account", "/customers/account");
+                                else
+                                    echo $this->Html->link("Login", "/customers/login");
+                            ?>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <header class="el-Header ">
+                <div class="el-Wrapper el-Header-top">
+                    <a href='#mmenu' class="el-Header-hamburger">
+                        <i class="el-Icon--menu"></i>
+                        <div class="el-Header-hamburger-menu">Menu</div>
+                    </a>
+                    <?= $this->Html->link("BoostPromotions", "/", array("class" => "el-Header-owl")) ?>
+                    <aside class="el-Header-ttarp">
+                        <a href="tel:855-207-5366" data-js="ttarp-overrideable">
+                            <i class="el-Icon--help"></i>
+                            <div class="el-Header-ttarp-talk">
+                                <div class="el-Header-ttarp-label">Talk to a Real Person</div>
+                                <div class="el-Header-ttarp-content"><span data-js="ttarp-overrideable">855-207-5366</span></div>
+                            </div>
+                        </a>
+                        <div class="el-Header-ttarp-chat">
+                            <span id=""><div id="LPMcontainer-1477538986271-1" class="LPMcontainer LPMoverlay" role="button" tabindex="0" style="margin: 0px; padding: 0px; border-style: solid; border-width: 0px; outline-color: rgb(106, 159, 177); outline-width: 2px; font-style: normal; font-weight: normal; font-variant-ligatures: normal; font-variant-caps: normal; list-style: none outside none; letter-spacing: normal; line-height: normal; text-decoration: none; vertical-align: baseline; white-space: normal; word-spacing: normal; background-repeat: repeat-x; background-position: left bottom; cursor: auto; display: block; position: relative; top: 0px; left: 0px;"><div class="el-Header-ttarp-label">chat with a real person</div>
+                                    <div class="el-Header-ttarp-content">
+                                        <a class="el-Header-ttarp-ttarpLink" data-lp-event="click">CHAT NOW</a>
+                                    </div></div></span>
+                        </div>
+                    </aside>  
+                </div>
+                <div class='el-Wrapper'>
+                    <nav class='el-Menu' id='mm-1'>
+                        <ul class='el-MenuPanel'>
+                            <li class='el-MenuItem'>
+
+                                <?= $this->Html->link("Products", "/products", array("class" => "el-MenuItem-link el-MegaProductGallery")); ?>
+                            </li>
+                            <li class='el-MenuItem'>
+                                <a class='el-MenuItem-link'>Themes</a>
+                            </li>
+                            <li class='el-MenuItem'>
+                                <a class='el-MenuItem-link'>Social Media</a>
+                            </li>
+                            <li class='el-MenuItem'>
+                                <a class='el-MenuItem-link'>How to Order</a>
+                            </li>
+                            <li class='el-MenuItem'>
+                                <a class='el-MenuItem-link'>Terms</a>
+                            </li>
+                            <li class='el-MenuItem'>
+                                <a class='el-MenuItem-link'>FaQ</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>            
+            <div class="container">
+                <?= $this->fetch("content"); ?>
+            </div>
+            <nav id="mmenu" class='el-Menu'>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><span>About us</span>
+                        <ul>
+                            <li><a href="#about/history">History</a></li>
+                            <li><span>The team</span>
+                                <ul>
+                                    <li><a href="#about/team/management">Management</a></li>
+                                    <li><a href="#about/team/sales">Sales</a></li>
+                                    <li><a href="#about/team/development">Development</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#about/address">Our address</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <?= $this->Html->script("jquery-3.1.1.js"); ?>
+        <?= $this->Html->script("bootstrap.min.js"); ?>
+        <?= $this->Html->script("jquery.mmenu.all.min.js"); ?>
+        <?= $this->Html->script("site.js"); ?>     
+        <?= $this->fetch('script'); ?>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("nav#mmenu").mmenu();
+            });
+        </script>
+
+        <?= $this->fetch("scriptBottom"); ?>
+    </body>
+</html>
