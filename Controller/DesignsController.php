@@ -93,7 +93,7 @@ class DesignsController extends AppController {
                 'CategoriesDescription.categories_name'
             ]
         ]);
-        
+
         if (empty($design)) {
             return $this->redirect([
                         "controller" => "pages",
@@ -177,7 +177,11 @@ class DesignsController extends AppController {
                 'Design.products_id' => $id
             ],
             'contain' => [
-                'Category' => ["limit" => 1]
+                'Category' => ["limit" => 1],
+                "DiscountedDesign" => [
+                    'fields' => "dd_new_products_price",
+                    "conditions" => ['DiscountedDesign.expires_date >' => date('Y-m-d')]
+                ]
             ],
             'fields' => [
                 'Design.products_id',
