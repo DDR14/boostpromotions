@@ -12,12 +12,6 @@ class Design extends AppModel {
             "foreignKey" => "manufacturers_id"
         )
     );
-    public $hasOne = array(
-        "ProductsDescription" => array(
-            "className" => "ProductsDescription",
-            "foreignKey" => "products_id"
-        )
-    );
     public $hasMany = array(
         "OrdersProduct" => array(
             "className" => "OrdersProduct",
@@ -28,6 +22,12 @@ class Design extends AppModel {
             "foreignKey" => "products_id"
         )
     );
+    public $hasOne = [
+        "DiscountedDesign" => [
+            "className" => "DiscountedDesign",
+            "foreignKey" => "design_id"
+        ]
+    ];
     public $hasAndBelongsToMany = array(
         'Category' => array(
             'className' => 'Category',
@@ -114,6 +114,12 @@ class Design extends AppModel {
                         "master_categories_id" => $master_categories_id,
                         "manufacturers_id" => 1,
                         "products_status" => 1
+                    ],
+                    "contain" => [
+                        "DiscountedDesign" => [
+                        'fields' => "dd_new_products_price",
+                        "conditions" =>['DiscountedDesign.expires_date >' => date('Y-m-d')]
+                        ]
                     ],
                     "order" => [['products_sort_order ASC']]
         ]);
