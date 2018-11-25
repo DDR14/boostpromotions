@@ -31,7 +31,12 @@
             <h2><?= count($designs); ?> Design Result(s)</h2>
             <ul>
                 <?php foreach ($designs as $design): ?>
-                    <li>
+                    <li><div class="iteml">
+                        <?php if ($design['DiscountedDesign']['dd_new_products_price']): ?>
+                            <div class="ribbon">
+                                <span><?= number_format($design['DiscountedDesign']['dd_new_products_price']); ?>% OFF</span>
+                            </div>
+                        <?php endif; ?>
                         <img ng-src="https://boostpromotions.com/images/designs/Resize/<?= $this->Custom->getImgDir($design['Design']['products_model']); ?>/<?= $design['Design']['products_image'] ?>" />
 
                         <h3><?= strtoupper($design["Design"]["products_model"]) ?></h3>
@@ -42,6 +47,7 @@
                             'class' => 'btn btn-success btn-sm'
                         ]);
                         ?>
+                    </div></li>
                     </li>
                 <?php endforeach; ?>
             </ul>
