@@ -6,14 +6,14 @@
                 <div class="modal-header teal-bg">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-                    <div class="col-md-2">
+                    <div class="col-sm-2">
                         <?= $this->Html->link($this->Html->image("logo-white.png", array("class" => "img-responsive", "alt" => "Boost Promotions")), "/", array("escape" => false)) ?>
                     </div>
                 </div>
                 <div class="modal-body light-blue-bg">
                     <div class="row">
                         <!-- Login Form  -->
-                        <div class="col-md-5 bordered-left">
+                        <div class="col-sm-5 bordered-left">
                             <h4>
                                 <i class="fa fa-lock"></i> &nbsp; Login to Boost Promotions
                             </h4>
@@ -69,7 +69,7 @@
                         </div>
 
                         <!-- Registration Form -->
-                        <div class="col-md-7">
+                        <div class="col-sm-7">
                             <h4>
                                 New Customer
                             </h4>
@@ -78,7 +78,7 @@
                             <div class="alert alert-info">
                                 <h5 class="text-black">Create your customer Profile to get started.</h5>
                                 <div class="row top-20">
-                                    <div class="col-md-6 col-md-offset-6">
+                                    <div class="col-sm-6 col-sm-offset-6">
                                         <?=
                                         $this->Html->link("Register", "/customers/register", array(
                                             "class" => "btn btn-block btn-success"
@@ -106,7 +106,7 @@
             <div class="modal-body">
                 <!-- Loading Spinner -->
                 <div class="row">
-                    <div class="col-md-4 col-md-offset-4 text-center top-20" ng-show="showLoading">
+                    <div class="col-sm-4 col-sm-offset-4 text-center top-20" ng-show="showLoading">
                         <i class="fa fa-spinner  fa-pulse fa-fw fa-3x"></i>
                         <p class="top-5"><b>Loading...</b></p>
                     </div>
@@ -140,14 +140,14 @@
 
                         <div ng-hide="itemDetails">
                             <!-- Search Box -->
-                            <div class="col-md-12">
+                            <div class="col-sm-12">
                                 <div class="row bottom-20">
-                                    <div class="col-md-6">
+                                    <div class="col-sm-6">
                                         <label>Search Tag Designs</label>
                                         <input type="search" placeholder="Enter Keyword(s)" ng-model="searchQuery" class="form-control input-sm">
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-sm-6">
                                         <button ng-hide="allItems" ng-click="viewAllDesigns()" class="pull-right btn top-25 btn-success btn-sm">
                                             VIEW ALL DESIGNS
                                         </button>
@@ -161,14 +161,14 @@
                             <div ng-hide="searchQuery">
                                 <!-- Sub Categories -->
                                 <div ng-hide="subCategories" class="row">
-                                    <div class="col-md-4 col-md-offset-4 text-center top-20">
+                                    <div class="col-sm-4 col-sm-offset-4 text-center top-20">
                                         <i class="fa fa-cog  fa-spin fa-fw fa-3x"></i>
                                         <p class="top-5"><b>Loading...</b></p>
                                     </div>
                                 </div>
 
                                 <div ng-hide="subCatItems" ng-repeat="item in subCategories">
-                                    <div class="col-md-3">
+                                    <div class="col-sm-3">
                                         <div ng-repeat="cat in item">
                                             <a href="" class="" ng-click="loadItems(cat.categories_id, $event)">
                                                 <b>{{cat.CategoriesDescription.categories_name| uppercase }}</b>
@@ -177,7 +177,10 @@
                                     </div>
                                 </div>
                                 <!-- Sub Categories Items -->
-                                <div ng-show="subCatItems && !allItems" ng-repeat="item in items.Design" class="col-md-2 col-xs-3 col-sm-3 no-padding " id="design_{{ items.Category.categories_id }}">
+                                <div ng-show="subCatItems && !allItems" ng-repeat="item in items.Design" class="col-sm-2 col-xs-3 col-sm-3 no-padding " id="design_{{ items.Category.categories_id }}">
+                                    <div ng-if="item.DiscountedDesign.dd_new_products_price" class="ribbon">
+                                        <span> {{ item.DiscountedDesign.dd_new_products_price | number:0 }}% OFF</span>
+                                    </div>
                                     <a  href="" class="thumbnail" ng-click="viewItem(item, item.Category[0].parent_id)">
                                         <img ng-src="https://boostpromotions.com/images/designs/Resize/{{ item.Design.products_model | getImgDir }}/{{ item.Design.products_image }}" class="img-tag img-responsive" />
 
@@ -185,7 +188,7 @@
                                     </a>
                                 </div>
 
-                                <div ng-show="items.length == 0 && subCatItems && !allItems" class="col-md-12">
+                                <div ng-show="items.length == 0 && subCatItems && !allItems" class="col-sm-12">
                                     <p><b class="text-warning">No Avaialble Design.</b></p>
                                 </div>
 
@@ -194,12 +197,15 @@
                                 <div ng-show="allItems && subCatItems">
 
                                     <div ng-repeat="category in AllTagData">
-                                        <div class="col-md-12">
+                                        <div class="col-sm-12">
                                             <h5><b>{{category.category}}</b></h5>
                                             <hr />
                                         </div>
 
-                                        <div class="col-md-2 col-xs-3 col-sm-3 no-padding" ng-repeat="item in category.item" id="{{ item.Design.products_id}}">
+                                        <div class="col-sm-2 col-xs-3 col-sm-3 no-padding" ng-repeat="item in category.item" id="{{ item.Design.products_id}}">
+                                            <div ng-if="item.DiscountedDesign.dd_new_products_price" class="ribbon">
+                                                <span> {{ item.DiscountedDesign.dd_new_products_price | number:0 }}% OFF</span>
+                                            </div>
                                             <a href="" class="thumbnail" ng-click="viewItem(item, item.Category[0].parent_id, item.Category[0].categories_image)">
                                                 <img ng-src="https://boostpromotions.com/images/designs/Resize/{{ item.Design.products_model | getImgDir }}/{{ item.Design.products_image}}"  class="img-120" />
                                                 <p class="text-center"><b>{{ item.Design.products_model}}</b></p>
@@ -207,7 +213,7 @@
                                         </div>
 
                                         <!-- Show when there is no design in the category -->
-                                        <div class="col-md-12" ng-if="category.item.length == 0">
+                                        <div class="col-sm-12" ng-if="category.item.length == 0">
                                             <p><b class="text-warning">No Avaialble Design.</b></p>
                                         </div>
                                     </div>
@@ -225,7 +231,10 @@
                     <div class="item-list">
                         <ul>
                             <li dir-paginate="item in searchData | filter:searchQuery | itemsPerPage: 20 " id="{{ item.Design.products_id}}">
-                                <div>
+                                <div class="iteml">
+                                    <div ng-if="item.DiscountedDesign.dd_new_products_price" class="ribbon">
+                                        <span> {{ item.DiscountedDesign.dd_new_products_price | number:0 }}% OFF</span>
+                                    </div>
                                     <img ng-src="https://boostpromotions.com/images/designs/Resize/{{ item.Design.products_model | getImgDir }}/{{ item.Design.products_image}}" imageonload >
 
                                     <h3>{{ item.Design.products_model | uppercase | removeTrailing01 }}</h3>
@@ -257,13 +266,16 @@
                             </h4>
                         </div>
 
-                        <div class="col-md-6 col-md-offset-3">
+                        <div class="col-sm-6 col-sm-offset-3">
 
                             <div class="alert alert-danger" ng-show="notDivisble">
                                 <p><b>Order QTY. should be divsible by 25.</b></p>
                             </div>
 
                             <div class="text-center">
+                                <div ng-if="itemData.DiscountedDesign.dd_new_products_price" class="ribbon">
+                                        <span> {{ itemData.DiscountedDesign.dd_new_products_price | number:0 }}% OFF</span>
+                                    </div>
                                 <img ng-src="https://boostpromotions.com/images/designs/{{ itemData.Design.products_model | getImgDir }}/{{ itemData.Design.products_image}}" class="img-responsive center-block img-preview">
                                 <p class="text-white top-10"><b>MODEL: {{ itemData.Design.products_model | uppercase | removeTrailing01 }}</b></p>
 
@@ -273,7 +285,7 @@
                                         <small class="text-warning">( You can only order in quantities of 25.)</small>
                                     </label><br />
 
-                                    <div class="col-md-8 col-md-offset-2">
+                                    <div class="col-sm-8 col-sm-offset-2">
                                         <div ng-hide="added" class="input-group">
                                             <input  type="number" step="25" ng-model="qty" min="25" class="form-control input-sm" required/>
 
@@ -292,7 +304,7 @@
 
                                 <!-- modified tag form -->
                                 <form  ng-if="productType == 'modified-tag' || productType == 'update-modified-tag'"  ng-submit="selectItem(itemData, qty, productType)">
-                                    <div class="col-md-10 col-md-offset-1">
+                                    <div class="col-sm-10 col-sm-offset-1">
                                         <label>
                                             <small class="text-warning">( Minimum Order is 25pcs.)</small>
                                         </label>
@@ -432,7 +444,7 @@
             <div class="modal-body">
                 <div class="row" ng-hide="itemDetails">
                     <!-- Favorite items list -->
-                    <div ng-repeat="fav in favorites" class="col-md-2 col-xs-3 col-sm-3 padd-5">
+                    <div ng-repeat="fav in favorites" class="col-sm-2 col-xs-3 col-sm-3 padd-5">
                         <a href="" class="thumbnail" ng-click="viewItem(fav, fav.productCategoryParentId)">
                             <img ng-src="https://boostpromotions.com/images/designs/Resize/{{ fav.Design.products_model | getImgDir }}/{{ fav.Design.products_image}}" class="img-responsive" />
                             <p class="text-center"><b>{{ fav.Design.products_model}}</b></p>
@@ -443,7 +455,7 @@
                 <!-- Item Details -->
                 <div ng-show="itemDetails">
                     <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
+                        <div class="col-sm-6 col-sm-offset-3">
 
                             <div class="alert alert-danger" ng-show="notDivisble">
                                 <p><b>Order QTY. should be divsible by 25.</b></p>
@@ -509,7 +521,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-2 no-padding" ng-repeat="model in selectedModels" ng-hide="loading">
+                    <div class="col-sm-2 no-padding" ng-repeat="model in selectedModels" ng-hide="loading">
                         <div class="thumbnail">
 
                             <img ng-src="https://boostpromotions.com/images/designs/Resize/{{ model.Design.products_model | getImgDir }}/{{ model.Design.products_image}}" class="img-tag"/>
@@ -523,7 +535,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6" ng-show="loading">
+                    <div class="col-sm-6" ng-show="loading">
                         <p><b>
                                 <i class="fa fa-spinner fa-pulse"></i>&nbsp; Loading Data Please Wait...
                             </b></p>
