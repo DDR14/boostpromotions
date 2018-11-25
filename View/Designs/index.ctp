@@ -19,6 +19,11 @@
             <div class="row">
                 <?php foreach ($category['Designs'] as $item): ?>
                     <div class="col-md-2 col-xs-3 col-sm-4 no-padding tags">
+                        <?php if ($item['DiscountedDesign']['dd_new_products_price']): ?>
+                            <div class="ribbon">
+                                <span><?= number_format($item['DiscountedDesign']['dd_new_products_price']); ?>% OFF</span>
+                              </div>
+                        <?php endif; ?>
                         <a ng-click="viewTag(<?= $item['Design']['products_id'] ?>, $event)" href="<?= $this->webroot; ?>designs/view/<?= $item['Design']['products_id'] ?>">
                             <img ng-src="https://boostpromotions.com/images/designs/Resize/<?= $this->Custom->getImgDir($item['Design']['products_model']) ?>/<?= $item['Design']['products_image'] ?>" 
                                  alt="<?= $item['Design']['design_name']; ?>"
@@ -57,11 +62,14 @@ but keep the view pages in case someone shares the designs -->
                 </div>
                 <div ng-hide="showLoading">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-sm-3">
+                            <div ng-if="design.DiscountedDesign.dd_new_products_price" class="ribbon">
+                                <span> {{ design.DiscountedDesign.dd_new_products_price | number:0 }}% OFF</span>
+                            </div>
                             <img ng-src="https://boostpromotions.com/images/designs/Resize/{{ design.Design.products_model | getImgDir }}/{{ design.Design.products_image}}" class="img-responsive" />
                         </div>
 
-                        <div class="col-md-9">
+                        <div class="col-sm-9">
                             <h2 ng-bind="design.Design.design_name"></h2>                   
                             <button ng-hide="added" class="btn btn-primary top-20" 
                                     ng-click="addToFavorites(design.Design, design.Category.parent_id)">Add To Favorites</button>
