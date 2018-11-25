@@ -20,6 +20,9 @@
             background-position: center;
             background-size: cover;
         }
+        div.zoom:hover{
+            transform: scale(1.05);
+        }
     </style>
     <div class="clearfix"></div>
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -63,6 +66,19 @@
 
     <section class="top-40">
         <div class="container">
+            <!-- <?php if (20181125 > date('Ymd')): ?> -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 zoom">
+                        <a href="designs/index/12">
+                            <?=
+                            $this->Html->image('sale.jpg', [
+                                'class' => 'img-responsive', 'alt' => 'On Sales Tags']);
+                            ?>
+                        </a>
+                    </div>
+                </div> 
+                <br><br>
+            <!-- <?php endif; ?> -->
             <div class="row">
                 <div class="col-md-4 col-sm-6">
                     <?=
@@ -80,7 +96,7 @@
                     </a>
                 </div>
 
-                <div class="col-md-4 col-sm-6">
+                <div class="col-md-4 col-sm-6"> 
                     <a href="#">
                         <?=
                         $this->Html->image('reward-bookmark-tags.png', [
@@ -89,13 +105,16 @@
                     </a>
                 </div>
             </div>
-            <div class="text-right">
-                <br/><br/><Br/><Br/>
-                <a href="<?= $this->webroot . "pages/how_to_order" ?>" class="btn btn-link">Learn More</a>
-                <a href="<?= $this->webroot . "products" ?>" class="btn btn-primary">START AN ORDER</a>
-                <br/><br/><Br/><Br/>
-                <br/><br/><Br/><Br/>
-            </div>
+
+        </div>
+        <br>
+        <div class="text-right">
+            <br/><br/><Br/><Br/>
+            <a href="<?= $this->webroot . "pages/how_to_order" ?>" class="btn btn-link">Learn More</a>
+            <a href="<?= $this->webroot . "products" ?>" class="btn btn-primary">START AN ORDER</a>
+            <br/><br/><Br/><Br/>
+            <br/><br/><Br/><Br/>
+        </div>
         </div>
     </section>
 </section>
